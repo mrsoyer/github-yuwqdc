@@ -1,0 +1,152 @@
+# Directives de Développement - WeInvest Website
+
+Je suis un assistant IA spécialisé dans le développement web. Mon rôle est de vous aider à créer un site web immobilier moderne, performant et SEO-friendly en suivant ces directives :
+
+## Architecture Technique
+- Utiliser Next.js 13.5.1 avec React 18.2.0 et TypeScript 5.2.2
+- Styling avec Tailwind CSS 3.3.3 et composants shadcn/ui
+- Optimisation des images et fonts via Next.js
+- SSG (Static Site Generation) pour des performances optimales
+- Code splitting et prefetching automatiques
+
+## Standards de Qualité
+- Code TypeScript strict et typé
+- ESLint + Prettier pour la qualité du code
+- Architecture modulaire et composants atomiques
+- Tests unitaires et d'intégration
+- Responsive design et accessibilité (WCAG)
+
+## SEO et Performance
+- Métadonnées optimisées pour chaque page
+- Structure HTML sémantique
+- Images optimisées avec attributs alt
+- Sitemap XML et robots.txt
+- Performance Web Vitals optimisée
+- Schema.org pour rich snippets
+
+## Base de Données
+- PostgreSQL avec Prisma comme ORM
+- Modèles de données typés
+- Migrations automatisées
+- Relations optimisées
+
+## Conventions
+- PascalCase pour composants
+- camelCase pour fonctions/variables 
+- kebab-case pour fichiers/URLs
+- Documentation JSDoc
+- Messages de commit conventionnels
+
+## Sécurité
+- Validation des entrées
+- Protection XSS/CSRF
+- Gestion sécurisée des tokens
+- Variables d'environnement
+
+# Organisation des Dossiers et Fichiers
+
+## Structure de Base
+```typescript
+src/
+├── pages/                        # Pages principales
+│   ├── page-home/               # Module page d'accueil
+│   │   ├── design/              # Composants visuels
+│   │   │   ├── index.tsx        # Configuration principale
+│   │   │   ├── hero.tsx         # Section héro
+│   │   │   └── features.tsx     # Section fonctionnalités
+│   │   └── workflow/            # Logique métier
+│   │       ├── triggers/        # Déclencheurs d'événements
+│   │       │   └── search-trigger.tsx
+│   │       └── actions/         # Gestionnaires d'événements
+│   │           └── search-action.tsx
+│   └── page-contact/            # Module page contact
+│       └── [même structure]
+├── elements/                    # Composants réutilisables
+│   ├── element-header/         # Module d'en-tête
+│   │   ├── design/            # Éléments visuels
+│   │   │   ├── index.tsx      # Layout principal
+│   │   │   ├── menu.tsx       # Menu de navigation
+│   │   │   └── logo.tsx       # Composant logo
+│   │   └── workflow/          # Logique d'en-tête
+│   └── element-footer/        # Module de pied de page
+```
+
+## Organisation des Données
+```typescript
+src/
+├── data/                      # Données statiques et types
+│   ├── pages/                # Données spécifiques aux pages
+│   │   ├── page-home.data.ts
+│   │   └── page-contact.data.ts
+│   ├── elements/            # Données des composants
+│   │   ├── element-header.data.ts
+│   │   └── element-footer.data.ts
+│   └── global.data.ts      # Données globales
+```
+
+## Structure API et Base de Données
+```typescript
+src/
+├── api/                     # Points d'entrée API
+│   ├── endpoints/          # Routes API
+│   │   ├── properties/    # API biens immobiliers
+│   │   │   ├── route.ts
+│   │   │   └── types.ts
+│   │   └── users/        # API utilisateurs
+│   └── middleware/       # Middleware API
+│       └── auth.ts      # Authentification
+├── database/            # Couche base de données
+│   ├── queries/        # Requêtes SQL
+│   │   ├── properties.queries.ts
+│   │   └── users.queries.ts
+│   ├── models/        # Modèles de données
+│   │   └── index.ts
+│   └── connections/   # Connexions DB
+│       └── prisma.ts
+```
+
+## Conventions de Nommage
+- Pages: page-[nom-de-page]
+- Elements: element-[nom-element]
+- Classes CSS: [type]-[fichier]-[description]
+  Exemples:
+  - page-home-hero-title
+  - element-header-menu-button
+
+## Standards de Code
+```typescript
+// Composant React
+export function PropertyCard({ title, price }: PropertyCardProps) {
+  return (
+    <div className="property-card">
+      <h3>{title}</h3>
+      <p>{formatPrice(price)}</p>
+    </div>
+  );
+}
+
+// Hook personnalisé
+function usePropertyFilters() {
+  const [filters, setFilters] = useState<Filters>({});
+  
+  useEffect(() => {
+    // Logique de filtrage
+  }, [/* dépendances */]);
+  
+  return { filters, setFilters };
+}
+
+// API Route
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  // Logique de l'API
+  return NextResponse.json(data);
+}
+```
+
+## Tests et Documentation
+- Tests unitaires pour chaque composant
+- Tests d'intégration pour les workflows
+- Documentation technique complète
+- Commentaires JSDoc pour les fonctions publiques
+- README détaillé pour chaque module
